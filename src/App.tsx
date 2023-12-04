@@ -113,7 +113,7 @@ const CombatPowerCalculator = () => {
           {attackStats.map(stat => (
             <TextField
               key={stat.id}
-              type="text"
+              type="number"
               label={stat.description}
               id={stat.name}
               name={stat.name}
@@ -129,7 +129,7 @@ const CombatPowerCalculator = () => {
           {defenseStats.map(stat => (
             <TextField
               key={stat.id}
-              type="text"
+              type="number"
               label={stat.description}
               id={stat.name}
               name={stat.name}
@@ -144,23 +144,23 @@ const CombatPowerCalculator = () => {
       {/* Other controls */}
       <div style={{ flexBasis: '100%', paddingTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{ marginBottom: '10px' }}>
-          <Button onClick={toggleAutoClear} variant="contained" color="primary" style={{ marginRight: '10px' }}>
+          <Button onClick={toggleAutoClear} variant="contained" color="primary" style={{ marginRight: '10px', marginBottom: '10px' }}>
             {autoClear ? 'Switch to Manual Clear' : 'Switch to Auto Clear'}
           </Button>
-          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{ marginRight: '10px' }}>
+          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{ marginRight: '10px', marginBottom: '10px'  }}>
             Calculate
           </Button>
-          <Button onClick={resetCalculator} variant="contained" style={{ marginRight: '10px' }}>
+          <Button onClick={resetCalculator} variant="contained" style={{ marginRight: '10px', marginBottom: '10px'  }}>
             Reset All
           </Button>
-          <Button onClick={resetCP} variant="contained" style={{ marginRight: '10px' }}>
+          <Button onClick={resetCP} variant="contained" style={{ marginRight: '10px', marginBottom: '10px'  }}>
             Reset CP
           </Button>
-          <Button onClick={clearStats} variant="contained" >
+          <Button onClick={clearStats} variant="contained" style={{ marginRight: '10px', marginBottom: '10px'  }} >
             Clear
           </Button>
         </div>
-        <Typography variant="subtitle1">
+        <Typography variant="subtitle1" style={{ marginBottom: '20px'  }}>
           <strong>Total CP: {totalCP}</strong>
         </Typography>
       </div>
