@@ -2,31 +2,36 @@ import React, { useState, ChangeEvent } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import statsData from './stats.json';
 
 interface StatValues {
   [key: string]: string;
 }
+
 
 interface CPValues {
   [key: string]: number;
 }
 
 const CombatPowerCalculator = () => {
-  const initialStats: StatValues = {
-    attack: '',
-    defense: '',
-    // ... add other stats here
-  };
+  const initialStats = statsData.reduce((acc, stat) => {
+    acc[stat.name] = '';
+    return acc;
+  }, {} as StatValues);
+  
+  const cpValues = statsData.reduce((acc, stat) => {
+    acc[stat.name] = stat.value;
+    return acc;
+  }, {} as CPValues);
+  
 
   const [stats, setStats] = useState<StatValues>(initialStats);
   const [totalCP, setTotalCP] = useState(0);
   const [autoClear, setAutoClear] = useState(true); // state for auto clear mode
 
-  const cpValues: CPValues = {
-    attack: 34.5,
-    defense: 21,
-    // ... add CP values for other stats
-  };
+  const attackStats = statsData.filter(stat => stat.id <= 16);
+  const defenseStats = statsData.filter(stat => stat.id > 16);
+
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -50,10 +55,20 @@ const CombatPowerCalculator = () => {
     setTotalCP(0);
   };
 
+  const clearStats = () => {
+    setStats(initialStats);
+  }
+
+  const resetCP = () => {
+    setTotalCP(0);
+  }
+
+
   const toggleAutoClear = () => {
     setAutoClear(!autoClear);
   };
 
+  /*
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -64,17 +79,15 @@ const CombatPowerCalculator = () => {
         {autoClear ? 'Switch to Manual Clear' : 'Switch to Auto Clear'}
       </Button>
 
-      {Object.keys(initialStats).map(stat => (
-        <div key={stat}>
+      {statsData.map(stat => (
+        <div key={stat.id}>
           <TextField
-            label={stat.charAt(0).toUpperCase() + stat.slice(1)}
             type="text"
-            id={stat}
-            name={stat}
-            value={stats[stat]}
+            label={stat.description}
+            id={stat.name}
+            name={stat.name}
+            value={stats[stat.name]}
             onChange={handleInputChange}
-            margin="normal"
-            variant="outlined"
           />
         </div>
       ))}
@@ -89,6 +102,69 @@ const CombatPowerCalculator = () => {
       <Typography variant="subtitle1">
         <strong>Total CP: {totalCP}</strong>
       </Typography>
+    </div>
+  ); */
+
+  return (
+    <div style={{ maxWidth: '68rem', margin: 'auto' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '31em' }}> {/* First Column for Attack Abilities */}
+          <Typography variant="h6">Attack Abilities</Typography>
+          {attackStats.map(stat => (
+            <TextField
+              key={stat.id}
+              type="text"
+              label={stat.description}
+              id={stat.name}
+              name={stat.name}
+              value={stats[stat.name]}
+              onChange={handleInputChange}
+              style={{ margin: '4px 4px' }}
+            />
+          ))}
+        </div>
+
+        <div style={{ width: '31rem' }}> {/* Second Column for Defense Abilities */}
+          <Typography variant="h6">Defense Abilities</Typography>
+          {defenseStats.map(stat => (
+            <TextField
+              key={stat.id}
+              type="text"
+              label={stat.description}
+              id={stat.name}
+              name={stat.name}
+              value={stats[stat.name]}
+              onChange={handleInputChange}
+              style={{ margin: '4px 4px' }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Other controls */}
+      <div style={{ flexBasis: '100%', paddingTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ marginBottom: '10px' }}>
+          <Button onClick={toggleAutoClear} variant="contained" color="primary" style={{ marginRight: '10px' }}>
+            {autoClear ? 'Switch to Manual Clear' : 'Switch to Auto Clear'}
+          </Button>
+          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{ marginRight: '10px' }}>
+            Calculate
+          </Button>
+          <Button onClick={resetCalculator} variant="contained" style={{ marginRight: '10px' }}>
+            Reset All
+          </Button>
+          <Button onClick={resetCP} variant="contained" style={{ marginRight: '10px' }}>
+            Reset CP
+          </Button>
+          <Button onClick={clearStats} variant="contained" >
+            Clear
+          </Button>
+        </div>
+        <Typography variant="subtitle1">
+          <strong>Total CP: {totalCP}</strong>
+        </Typography>
+      </div>
+
     </div>
   );
 };
