@@ -108,7 +108,7 @@ const CombatPowerCalculator = () => {
   return (
     <div style={{ maxWidth: '68rem', margin: 'auto' }}>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '31em' }}> {/* First Column for Attack Abilities */}
+        <div style={{ width: '32em' }}> {/* First Column for Attack Abilities */}
           <Typography variant="h6">Attack Abilities</Typography>
           {attackStats.map(stat => (
             <TextField
@@ -124,7 +124,7 @@ const CombatPowerCalculator = () => {
           ))}
         </div>
 
-        <div style={{ width: '31rem' }}> {/* Second Column for Defense Abilities */}
+        <div style={{ width: '32rem' }}> {/* Second Column for Defense Abilities */}
           <Typography variant="h6">Defense Abilities</Typography>
           {defenseStats.map(stat => (
             <TextField
