@@ -27,7 +27,7 @@ const CombatPowerCalculator = () => {
 
   const [stats, setStats] = useState<StatValues>(initialStats);
   const [totalCP, setTotalCP] = useState(0);
-  const [autoClear, setAutoClear] = useState(false);
+  const [autoClear, setAutoClear] = useState(true);
 
   const attackStats = statsData.filter(stat => stat.id <= 16);
   const defenseStats = statsData.filter(stat => stat.id > 16);
