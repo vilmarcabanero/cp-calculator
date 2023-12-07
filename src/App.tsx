@@ -47,6 +47,7 @@ const CombatPowerCalculator = () => {
       totalForCurrentInputs += (parseFloat(stats[stat]) || 0) * (cpValues[stat] || 0);
     }
     setTotalCP(prevTotalCP => prevTotalCP + totalForCurrentInputs);
+    setStats(initialStats);
     // if (autoClear) setStats(initialStats);
   };
 
@@ -181,12 +182,14 @@ const CombatPowerCalculator = () => {
           {/* Button Group */}
           <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{
             marginRight: '10px',
+            marginLeft: '10px',
             flex: 1 // Makes buttons share space equally
           }}>
             Calculate
           </Button>
           <Button onClick={resetCalculator} variant="contained" style={{
-            flex: 1 // Makes buttons share space equally
+            flex: 1, // Makes buttons share space equally
+            marginRight: '10px'
           }}>
             Reset All
           </Button>
