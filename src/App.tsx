@@ -27,7 +27,7 @@ const CombatPowerCalculator = () => {
 
   const [stats, setStats] = useState<StatValues>(initialStats);
   const [totalCP, setTotalCP] = useState(0);
-  const [autoClear, setAutoClear] = useState(true);
+  // const [autoClear, setAutoClear] = useState(true);
 
   const attackStats = statsData.filter(stat => stat.id <= 16);
   const defenseStats = statsData.filter(stat => stat.id > 16);
@@ -47,7 +47,7 @@ const CombatPowerCalculator = () => {
       totalForCurrentInputs += (parseFloat(stats[stat]) || 0) * (cpValues[stat] || 0);
     }
     setTotalCP(prevTotalCP => prevTotalCP + totalForCurrentInputs);
-    if (autoClear) setStats(initialStats);
+    // if (autoClear) setStats(initialStats);
   };
 
   const resetCalculator = () => {
@@ -55,18 +55,18 @@ const CombatPowerCalculator = () => {
     setTotalCP(0);
   };
 
-  const clearStats = () => {
-    setStats(initialStats);
-  }
+  // const clearStats = () => {
+  //   setStats(initialStats);
+  // }
 
-  const resetCP = () => {
-    setTotalCP(0);
-  }
+  // const resetCP = () => {
+  //   setTotalCP(0);
+  // }
 
 
-  const toggleAutoClear = () => {
-    setAutoClear(!autoClear);
-  };
+  // const toggleAutoClear = () => {
+  //   setAutoClear(!autoClear);
+  // };
 
   /*
   return (
