@@ -107,7 +107,7 @@ const CombatPowerCalculator = () => {
 
   return (
     <div style={{ maxWidth: '68rem', margin: 'auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '5rem' }}>
         <div style={{ width: '32em' }}> {/* First Column for Attack Abilities */}
           <Typography variant="h6">Attack Abilities</Typography>
           {attackStats.map(stat => (
@@ -141,31 +141,61 @@ const CombatPowerCalculator = () => {
         </div>
       </div>
 
-      {/* Other controls */}
-      <div style={{ flexBasis: '100%', paddingTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ marginBottom: '10px' }}>
-          <Button onClick={toggleAutoClear} variant="contained" color="primary" style={{ marginRight: '10px', marginBottom: '10px' }}>
-            {autoClear ? 'Switch to Manual Clear' : 'Switch to Auto Clear'}
-          </Button>
-          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{ marginRight: '10px', marginBottom: '10px'  }}>
-            Calculate
-          </Button>
-          <Button onClick={resetCalculator} variant="contained" style={{ marginRight: '10px', marginBottom: '10px'  }}>
-            Reset All
-          </Button>
-          <Button onClick={resetCP} variant="contained" style={{ marginRight: '10px', marginBottom: '10px'  }}>
-            Reset CP
-          </Button>
-          <Button onClick={clearStats} variant="contained" style={{ marginRight: '10px', marginBottom: '10px'  }} >
-            Clear
-          </Button>
-        </div>
-        <Typography variant="subtitle1" style={{ marginBottom: '20px'  }}>
+      <div style={{
+        flexBasis: '100%',
+        paddingTop: '20px',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        background: 'white',
+        position: 'relative', // Ensure the parent has a position context
+        paddingBottom: '100px' // Adjust as needed for space for fixed elements
+      }}>
+        {/* Fixed Typography for Total CP */}
+        <Typography variant="subtitle1" style={{
+          marginBottom: '20px',
+          position: 'fixed',
+          bottom: 25, // Adjust as per your layout needs
+          background: 'white',
+          zIndex: 1000,
+          width: '100%', // Ensure it spans the full width
+          textAlign: 'center', // Center the text,
+          padding: '10px'
+        }}>
           <strong>Total CP: {totalCP}</strong>
         </Typography>
+
+        {/* Fixed Buttons Container */}
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          position: 'fixed',
+          bottom: 0,
+          background: 'white',
+          zIndex: 1000,
+          width: '100%', // Adjust width as per your layout needs
+          padding: '10px' // Add some padding around the buttons
+        }}>
+          {/* Button Group */}
+          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{
+            marginRight: '10px',
+            flex: 1 // Makes buttons share space equally
+          }}>
+            Calculate
+          </Button>
+          <Button onClick={resetCalculator} variant="contained" style={{
+            flex: 1 // Makes buttons share space equally
+          }}>
+            Reset All
+          </Button>
+        </div>
+</div>
+
+        
       </div>
 
-    </div>
   );
 };
 
