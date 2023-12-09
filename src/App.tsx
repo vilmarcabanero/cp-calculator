@@ -180,19 +180,20 @@ const CombatPowerCalculator = () => {
           padding: '10px' // Add some padding around the buttons
         }}>
           {/* Button Group */}
-          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{
-            marginRight: '10px',
-            marginLeft: '10px',
-            flex: 1 // Makes buttons share space equally
-          }}>
-            Calculate
-          </Button>
           <Button onClick={resetCalculator} variant="contained" style={{
             flex: 1, // Makes buttons share space equally
+            marginLeft: '10px',
             marginRight: '10px'
           }}>
             Reset All
           </Button>
+          <Button onClick={calculateAndAddToTotalCP} variant="contained" color="secondary" style={{
+            marginRight: '10px',
+            flex: 1 // Makes buttons share space equally
+          }}>
+            Calculate
+          </Button>
+
         </div>
 </div>
 
